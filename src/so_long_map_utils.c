@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/17 13:06:55 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:08:57 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_matrix	*fill_map(t_matrix *map, char *filedescriptor)
 			close(fd);
 			return (NULL);
 		}
+        check_new_line(map->grid[y]);
 		y++;
 	}
 	close(fd);

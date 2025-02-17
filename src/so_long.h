@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/17 12:31:26 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:32:48 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>   // Per read, write, close, etc.
 # include <fcntl.h>    // Per open()
 # include "../Libft/libft.h"         // Include le funzioni della libft
-# include "../Get_next_line/get_next_line.h"  // Include le funzioni di get_next_line
 # include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
 
 // Definisci strutture utili per il gioco
@@ -37,5 +36,6 @@ t_matrix *allocate_map(int rows);
 t_matrix	*fill_map(t_matrix *map, char *filedescriptor);
 int	ft_count_rows(char *filename);
 void	free_matrix(t_matrix *map_struct);
+int check_new_line(char *str);
 
 #endif

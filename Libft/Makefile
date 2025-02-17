@@ -37,6 +37,7 @@ SRCS = ft_isalpha.c \
        ft_putnbr_fd.c \
        ft_strmapi.c \
        ft_striteri.c \
+       get_next_line.c \
 
 BONUS_SRCS = ft_lstnew.c \
              ft_lstadd_front.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmontini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 09:54:57 by fmontini          #+#    #+#             */
-/*   Updated: 2025/01/09 13:30:37 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:31:03 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BUFFER_SIZE 42
 #endif
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static int	read_and_store(int fd, char **storage)
 {
