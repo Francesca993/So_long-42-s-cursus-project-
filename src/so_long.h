@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/17 14:32:48 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:55:04 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_matrix *allocate_map(int rows);
 t_matrix	*fill_map(t_matrix *map, char *filedescriptor);
 int	ft_count_rows(char *filename);
 void	free_matrix(t_matrix *map_struct);
-int check_new_line(char *str);
+int remove_new_line(char *str);
+int check_map_rect(t_matrix *map_struct, int rows);
 
 #endif

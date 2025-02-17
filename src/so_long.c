@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/17 14:32:15 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:55:40 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char *argv[])
 	rows = ft_count_rows(argv[1]);
 	map_struct = allocate_map(rows);
 	fill_map(map_struct, argv[1]);
+	check_map_rect(map_struct, rows);
 	// Stampa la mappa per verifica
 	printf("Mappa caricata:\n");
 	for (int i = 0; i < map_struct->rows; i++)
