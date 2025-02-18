@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/17 14:41:41 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:46:16 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_map(char **map, int rows)
 			free(map[i]);
 		i++;
 	}
-
 	free(map); // Libera l'array di puntatori
 }
 

@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/17 14:36:51 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/18 13:20:37 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC	:= $(addprefix src/, $(SRC))
 OBJ	=	$(SRC:.c=.o)
 
 # compilation flags
-CFLAGS	=	-Wall -Werror -Wextra -I./include -Imlx
+CFLAGS	=	-Wall -Werror -Wextra -g -I./include -Imlx
 
 # MLX flags
 MLX_DIR = minilibx
@@ -35,26 +35,38 @@ MINILIBX_FLAGS	=  -I $(MLX_DIR) -L $(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+# Printf
+FT_PRINTF_DIR = Printf
+FT_PRINTF = $(FT_PRINTF_DIR)/ft_printf.a
+
 # Rules
-$(NAME): $(OBJ) $(LIBFT) $(GNL_LIB)
+$(NAME): $(OBJ) $(LIBFT) $(GNL_LIB) $(FT_PRINTF)
 	@make -C $(MLX_DIR)
 	@make -C $(LIBFT_DIR)
-	cc -o $(NAME) $(OBJ) $(LIBFT) $(GNL_LIB) $(CFLAGS) $(MINILIBX_FLAGS)
+	@make -C $(FT_PRINTF_DIR)
+	cc -o $(NAME) $(OBJ) $(LIBFT) $(GNL_LIB) $(CFLAGS) $(MINILIBX_FLAGS) $(FT_PRINTF)
 
 # Esegui il Makefile di libft
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
+# Esegui Makefile di ft_printf
+$(FT_PRINTF):
+	@make -C $(FT_PRINTF_DIR)
 
 all:	$(NAME)
 
 clean:
 	rm -rf $(OBJ)
 	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(FT_PRINTF_DIR)
 
 fclean:	clean
 	rm -rf $(NAME)
 	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(FT_PRINTF_DIR)
 
-re:	fclean all @make re -C $(LIBFT_DIR)
+re:	fclean all 
+	@make re -C $(LIBFT_DIR)
+	@make re -C $(FT_PRINTF_DIR)
 
 .PHONY : all clean fclean re
