@@ -64,19 +64,13 @@ int	check_map_walls_x(t_matrix *map_struct, int rows)
 	while (map_struct->grid[y][x] != '\0')
 	{
 		if (map_struct->grid[y][x] != '1')
-		{
-			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-			return (0);
-		}
+			return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
 		x++;
 	}
 	while (y < rows -1)
 	{
 		if (map_struct->grid[y][x - 1] != '1')
-		{
-			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-			return (0);
-		}
+			return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
 		y++;
 	}
 	return (1);
@@ -100,10 +94,7 @@ int	check_map_walls(t_matrix *map_struct, int rows)
 		while (map_struct->grid[y][x] != '\0')
 		{
 			if (map_struct->grid[y][x] != '1')
-			{
-				ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-				return (0);
-			}
+				return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
 			x++;
 		}
 	}

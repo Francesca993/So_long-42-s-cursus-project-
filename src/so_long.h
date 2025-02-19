@@ -26,8 +26,9 @@
 typedef struct s_matrix
 {
     char	**grid;
+    char    **map_cpy;
     int     rows;
-    int     col;
+    int     cols;
 } t_matrix;
 
 // Prototipi delle funzioni principali

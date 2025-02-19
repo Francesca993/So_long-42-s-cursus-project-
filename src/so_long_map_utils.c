@@ -88,6 +88,7 @@ t_matrix	*fill_map(t_matrix *map, char *filedescriptor)
         remove_new_line(map->grid[y]);
 		y++;
 	}
+	map->rows = y;
 	close(fd);
 	return (map);
 }
@@ -102,7 +103,7 @@ int	ft_count_rows(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Errore nell'apertura del file");
+		ft_printf("Errore nell'apertura del file");
 		return (-1); // Segnala errore
 	}
 	while ((line = get_next_line(fd)) != NULL )
@@ -112,7 +113,7 @@ int	ft_count_rows(char *filename)
 	}
 	if (count <= 0)
 	{
-		printf("Errore: impossibile contare le righe della mappa.\n");
+		ft_printf("Errore: impossibile contare le righe della mappa.\n");
 		return (1);
 	}
 	close(fd);
