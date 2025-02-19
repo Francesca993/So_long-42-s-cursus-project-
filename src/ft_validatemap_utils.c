@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_checkmap_utils.c                           :+:      :+:    :+:   */
+/*   ft_validatemap_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/18 15:45:30 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:03:00 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	remove_new_line(char *str)
-{
-	int	count;
-
-	if (!str)
-		return (0);
-	count = ft_strlen(str);
-	if ((count > 0) && (str[count - 1] == '\n'))
-	{
-		str[count - 1] = '\0';
-	}
-	return (1);
-}
 
 int	check_map_rect(t_matrix *map_struct, int rows)
 {
@@ -64,18 +50,23 @@ int	check_map_walls_x(t_matrix *map_struct, int rows)
 	while (map_struct->grid[y][x] != '\0')
 	{
 		if (map_struct->grid[y][x] != '1')
-			return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
+		{
+			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
+			return (0);
+		}
 		x++;
 	}
 	while (y < rows -1)
 	{
 		if (map_struct->grid[y][x - 1] != '1')
-			return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
+		{
+			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
+			return (0);
+		}
 		y++;
 	}
 	return (1);
 }
-
 int	check_map_walls(t_matrix *map_struct, int rows)
 {
 	int	y;

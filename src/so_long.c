@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/18 13:00:54 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:43:00 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char *argv[])
 	for (int i = 0; i < map_struct->rows; i++)
 		printf("%s\n", map_struct->grid[i]);
 
+	check_if_valid_path(map_struct);
 	// Libera la memoria
 	free_map(map_struct->grid, map_struct->rows);
 	free(map_struct);

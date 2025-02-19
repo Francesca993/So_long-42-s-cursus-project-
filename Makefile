@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/18 13:20:37 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/19 14:13:13 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,11 @@ NAME	=	so_long
 
 # Source files (add your files from src/ here)
 SRC	=	so_long.c \
-		so_long_map_utils.c \
-		so_long_checkmap_utils.c
+		ft_to_allocate_map.c \
+		ft_to_copy_map_from_fd.c \
+		ft_validatemap_utils.c \
+		ft_for_flood_fill.c \
+		ft_to_validate_map.c \
 
 # adds the src/ prefix to files in SRC
 SRC	:= $(addprefix src/, $(SRC))
