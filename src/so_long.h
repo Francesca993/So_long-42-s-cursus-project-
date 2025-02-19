@@ -29,6 +29,8 @@ typedef struct s_matrix
     char    **map_cpy;
     int     rows;
     int     cols;
+    int     position_p_row;
+    int     map->position_p_col = x;
 } t_matrix;
 
 // Prototipi delle funzioni principali
