@@ -6,32 +6,11 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 16:06:34 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:13:18 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//controlla per flood fill se la casella in cui si trova è consentita
-int		check_values_flood(t_matrix *map, int row, int col)
-{
-	char	values[3];
-	int		i;
-
-    values[0] = '1';
-    values[1] = 'B';
-    values[2] = 'X';
-	i = 0;
-	while ((i < 3) && (map->map_cpy[row][col] != values[i]))
-		i++;
-	if (i < 3)
-	{
-		
-		return (1);
-	} else {
-		return (0);
-	} 
-}
 
 //riempe la mappa ovunque possa passare
 void flood_fill(t_matrix *map, int row, int col)
@@ -94,8 +73,6 @@ void		find_position_p(t_matrix *map)
 				{
 					map->position_p_row = y;
 					map->position_p_col = x;
-					ft_printf("valore di y per flood fill: %d\n", map->position_p_row);
-					ft_printf("valore di x per flood fill: %d\n", map->position_p_col);
 				}
 			x++;
 			}
@@ -130,8 +107,6 @@ int		count_p_e(t_matrix	*map)
 			}
 		y++;
 	}
-	ft_printf("valore di E:%d\n", e);
-	ft_printf("valore di P:%d\n", p);
 	if (!((p == 1) && (e == 1)))
 		return(ft_printf("Errore: trovate uscite o inizi multipli"), 0);
 	return(1);

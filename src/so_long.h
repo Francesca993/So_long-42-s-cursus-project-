@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 14:25:41 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:12:15 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int			check_map_walls(t_matrix *map_struct, int rows);
 int			check_map_walls_x(t_matrix *map_struct, int rows);
 char		*copy_fd_tomap(t_matrix *map, char *line, int y, int fd);
 void		map_copy(t_matrix *map);
-int			check_values_flood(t_matrix *map, int row, int col);
 void		flood_fill(t_matrix *map, int row, int col);
 void		check_values_map_cpy(t_matrix *map);
 void		find_position_p(t_matrix *map);
