@@ -12,6 +12,7 @@
 
 #include "so_long.h"
 
+//copia la mappa in quella da utilizzare per flood fill
 void    map_copy(t_matrix *map)
 {
 	int		i;
@@ -28,7 +29,8 @@ void    map_copy(t_matrix *map)
 	map->map_cpy[i] = NULL;
 }
 
-int		check_values(t_data *map, int row, int col)
+//controlla per flood fill se la casella in cui si trova è consentita
+int		check_values_flood(t_data *map, int row, int col)
 {
 	const char	values[];
 	int		i;
@@ -46,9 +48,10 @@ int		check_values(t_data *map, int row, int col)
 	} 
 }
 
+//riempe la mappa ovunque possa passare
 void flood_fill(t_matrix *map, int row, int col)
 {
-	if(check_values(map, row, col) = 1)
+	if(check_values_flood(map, row, col) = 1)
 	{
 		flood_fill(map, row - 1, col);
 		flood_fill(map, row + 1, col);
@@ -59,6 +62,8 @@ void flood_fill(t_matrix *map, int row, int col)
 		return ;
 }
 
+//controlla dopo il riempimento con le X che non ci siano piu collezionabili e uscite
+//ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
 void	check_values_map_cpy(t_matrix *map)
 {
 	int		y;
@@ -81,3 +86,78 @@ void	check_values_map_cpy(t_matrix *map)
 	}
 }
 
+//cerca la posizione iniziale da passare a flood fill
+void		find_position_p(t_matrix *map)
+{
+	int		y;
+	int		x;
+	
+	y= 0;
+	if(!(ft count_p_e(map)))
+		return ;
+	while(y < map->rows)
+	{
+		x = 0;
+		{
+			while (x < map->cols)
+			{
+				if(map[y][x] == 'P')
+				{
+					map->position_p_row = y;
+					map->position_p_col = x;
+				}
+			x++;
+			}
+		}
+		y++;
+	}
+}
+
+// controlla che non ci siano piu di un'unscita o di una posizione di partenza
+int		count_p_e(t_matrix	*map)
+{
+	int		y;
+	int		p;
+	int		e;
+	int		x;
+	
+	p = 0;
+	y= 0;
+	e = 0;
+	while(y < map->rows)
+	{
+		x = 0;
+		{
+			while (x < map->cols)
+			{
+				if(map[y][x] == 'P')
+					p++;
+				if(map[y][x] == 'E')
+					e++;
+			x++;
+			}
+		}
+		y++;
+	}
+	if ((p != 1) && (e != 1))
+		return(ft_printf("Errore: trovate uscite o inizi multipli"), 0);
+	return(1);
+}
+
+// tutto insieme?
+int		check_if_valid_path()
+{
+	//copia la mappa
+	map_copy(t_matrix *map);
+	//cerca la posizione iniziale da passare a flood fill e controlla 
+	//che non ci siano piu di un'unscita o di una posizione di partenza
+	find_position_p(t_matrix *map);
+	//riempe la mappa ovunque possa passare
+	flood_fill(t_matrix *map, int row, int col);
+	//controlla dopo il riempimento con le X che non ci siano piu collezionabili e uscite
+	//ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
+	check_values_map_cpy(t_matrix *map);
+
+	
+
+}
