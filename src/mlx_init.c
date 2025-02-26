@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/26 13:06:04 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:30:18 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void    open_image(t_matrix *data)
 {
     data->textures.grass = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/Grass.xpm", &data->textures.size, &data->textures.size);
     data->textures.wall = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/wall.xpm copia", &data->textures.size, &data->textures.size);
-    if (!((data->textures.wall) || (data->textures.wall)))
+    data->textures.player_w = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_w.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_s = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_s.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_d = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_d.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_a = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_a.xpm", &data->textures.size, &data->textures.size);
+    if (!((data->textures.wall) || (data->textures.grass)))
         ft_printf("texture non caricate");
 }
 void    print_map(char *line, t_matrix *data, int index)
@@ -46,13 +50,17 @@ void    print_map(char *line, t_matrix *data, int index)
     i = 0;
     while (line[i])
     {
-        if ((line[i] == '1') || (line[i] == 'E') || (line[i] == 'P'))
+        if ((line[i] == '1') || (line[i] == 'E'))
         {
             mlx_put_image_to_window(data->mlx, data->win, data->textures.wall, i * TILE_SIZE, (index * TILE_SIZE));
         }
         else if (line[i] == '0' || (line[i] == 'C'))
         {
             mlx_put_image_to_window(data->mlx, data->win, data->textures.grass, i * TILE_SIZE, (index * TILE_SIZE));
+        }
+        else if(line[i] == 'P')
+        {
+            mlx_put_image_to_window(data->mlx, data->win, data->textures.player_d, i * TILE_SIZE, (index * TILE_SIZE));
         }
         i++;
     }
@@ -91,6 +99,8 @@ void open_window(t_matrix *data)
         return ;   
     }
     open_image(data);
+    //mlx_key_hook(data->win, key_hook, &data);
+    mlx_hook(data->win, 2, 1L<<0, key_hook, data);
     fill_window(data);
           // 17 è il valore corrispondente all'evento DestroyNotify, che viene inviato quando l'utente clicca sulla "X" della finestra, 0 è la mask associata, che in questo caso non è necessaria per DestroyNotify.
     mlx_hook(data->win, 17, 0, close_window, data); 
