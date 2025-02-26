@@ -74,6 +74,8 @@ void		find_position_p(t_matrix *map)
 					map->position_p_row = y;
 					map->position_p_col = x;
 				}
+				if (map->map[y][x] == 'C')
+					map->coletionables++;
 			x++;
 			}
 		}

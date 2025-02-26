@@ -19,7 +19,7 @@
 # include <unistd.h>   // Per read, write, close, etc.
 # include <fcntl.h>    // Per open()
 # include "../Libft/libft.h"         // Include le funzioni della libft
-# include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
+//# include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
 # include "../Printf/ft_printf.h"         // Include le funzioni della libft
 
 # define TILE_SIZE 64
@@ -42,6 +42,9 @@ typedef struct s_textures
 	void	*player_a;//giu
 	void	*player_s;//sinistra
 	void	*player_d;//destra
+	void	*mouse;
+	void	*bowl;
+	void	*exit;
 	int		size;
 }	t_textures;
 
@@ -57,6 +60,8 @@ typedef struct s_matrix
 	t_textures	textures;
 	void	*mlx;
 	void	*win;
+	int		count_moves;
+	int		colletionables;
 }	t_matrix;
 
 // Prototipi delle funzioni principali
@@ -84,6 +89,6 @@ void		fill_window(t_matrix *data);
 void		print_map(char *line, t_matrix *data, int index);
 void    	open_image(t_matrix *data);
 int			key_hook(int keycode, t_matrix *data);
-void			move_player(t_matrix *game, int new_row, int new_col);
+void		move_player(t_matrix *game, int new_row, int new_col);
 
 #endif

@@ -40,6 +40,10 @@ void    open_image(t_matrix *data)
     data->textures.player_s = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_s.xpm", &data->textures.size, &data->textures.size);
     data->textures.player_d = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_d.xpm", &data->textures.size, &data->textures.size);
     data->textures.player_a = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_a.xpm", &data->textures.size, &data->textures.size);
+    data->textures.mouse = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/mouse.xpm", &data->textures.size, &data->textures.size);
+    data->textures.exit = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/cuccia.xpm", &data->textures.size, &data->textures.size);
+    data->textures.bowl = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/food.xpm", &data->textures.size, &data->textures.size);
+    
     if (!((data->textures.wall) || (data->textures.grass)))
         ft_printf("texture non caricate");
 }
@@ -50,17 +54,25 @@ void    print_map(char *line, t_matrix *data, int index)
     i = 0;
     while (line[i])
     {
-        if ((line[i] == '1') || (line[i] == 'E'))
+        if ((line[i] == '1'))
         {
             mlx_put_image_to_window(data->mlx, data->win, data->textures.wall, i * TILE_SIZE, (index * TILE_SIZE));
         }
-        else if (line[i] == '0' || (line[i] == 'C'))
+        else if (line[i] == '0')
         {
             mlx_put_image_to_window(data->mlx, data->win, data->textures.grass, i * TILE_SIZE, (index * TILE_SIZE));
         }
         else if(line[i] == 'P')
         {
             mlx_put_image_to_window(data->mlx, data->win, data->textures.player_d, i * TILE_SIZE, (index * TILE_SIZE));
+        }
+        else if(line[i] == 'E')
+        {
+            mlx_put_image_to_window(data->mlx, data->win, data->textures.exit, i * TILE_SIZE, (index * TILE_SIZE));
+        }
+        else if(line[i] == 'C')
+        {
+            mlx_put_image_to_window(data->mlx, data->win, data->textures.bowl, i * TILE_SIZE, (index * TILE_SIZE));
         }
         i++;
     }
