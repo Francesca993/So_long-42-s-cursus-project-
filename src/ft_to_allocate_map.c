@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 13:05:37 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:19:43 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,51 @@ void	free_map(char **map, int rows)
 	while (i < rows)
 	{
 		if (map[i])
+		{
 			free(map[i]);
+			map[i] = NULL;
+		}
 		i++;
 	}
 	free(map);/*libera l'array di puntatori*/
 }
 
-void	free_matrix(t_matrix *map_struct)
+void	free_matrix(t_matrix *data)
 {
-	if (!map_struct)
+	if (!data)
 		return ;
-	if (map_struct->grid)
-		free_map(map_struct->grid, map_struct->rows);
-	free(map_struct); // Libera la struttura stessa
+	if (data->map)
+	{
+		free_map(data->map, data->rows);
+		data->map = NULL;
+	}
+	if(data->map_cpy)
+	{
+		free_map(data->map_cpy, data->rows);
+		data->map_cpy = NULL;
+	}
+	free(data); // Libera la struttura stessa
 }
 
 t_matrix	*allocate_map(int rows)
 {
-	t_matrix	*map_struct;
+	t_matrix	*data;
 
-	map_struct = (t_matrix *)malloc(sizeof(t_matrix));
-	if (!map_struct)
+	data = (t_matrix *)ft_calloc(1, sizeof(t_matrix));
+	if (!data)
 	{
 		perror("Errore nell'allocazione della struttura");
 		return (NULL);
 	}
-	map_struct->grid = (char **)malloc(rows * sizeof(char *));
-	if (!map_struct->grid)
+	data->map = (char **)ft_calloc(rows, sizeof(char *));
+	if (!data->map)
 	{
 		perror("Errore nell'allocazione della mappa");
-		free(map_struct);
+		free(data);
 		return (NULL);
 	}
-	map_struct->rows = rows;
-	return (map_struct);
+	data->rows = rows;
+	return (data);
 }
 
 int	ft_count_rows(char *filename)

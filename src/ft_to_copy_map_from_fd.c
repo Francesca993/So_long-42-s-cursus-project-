@@ -14,15 +14,15 @@
 
 char	*copy_fd_tomap(t_matrix *map, char *line, int y, int fd)
 {
-	map->grid[y] = line;
-	if (!map->grid[y])
+	map->map[y] = line;
+	if (!map->map[y])
 	{
-		free_map(map->grid, y);
+		free_map(map->map, y);
 		free(map);
 		close(fd);
 		return (NULL);
 	}
-	remove_new_line(map->grid[y]);
+	remove_new_line(map->map[y]);
 	return (line);
 }
 
@@ -40,9 +40,18 @@ t_matrix	*fill_map(t_matrix *map, char *filedescriptor)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!line)
+		/*
+		if (!line)		
 			return (NULL);
 		line = copy_fd_tomap(map, line, y, fd);
+		y++;
+		line = get_next_line(fd);
+		*/
+		if(!copy_fd_tomap(map, line, y, fd))
+		{
+			close(fd);
+			return(NULL);
+		}
 		y++;
 		line = get_next_line(fd);
 	}
@@ -68,13 +77,28 @@ void    map_copy(t_matrix *map)
 {
 	int		i;
 
-	map->map_cpy = (char **) malloc(sizeof(char *) * (map->rows + 1));
-	if (map->map_cpy == NULL)
+	map->map_cpy = (char **)ft_calloc((map->rows + 1), sizeof(char *));
+	if (!(map->map_cpy))
+	{
 		ft_printf("Errore nell'allocazione della memoria nella copia della mappa");
+		return ;
+	}
 	i = 0;
 	while (i < map->rows)
 	{
-		map->map_cpy[i] = ft_strdup(map->grid[i]);
+		map->map_cpy[i] = ft_strdup(map->map[i]);
+		if (!(map->map_cpy[i]))
+		{
+			while (i < 0)
+			{
+				i--;
+				free(map->map_cpy[i]);
+			}
+			free(map->map_cpy);
+			map->map_cpy = NULL;
+			ft_printf("errore nell'allocazione della mem. della copia della mappa");
+			return ;
+		}
 		i++;
 	}
 	map->map_cpy[i] = NULL;
@@ -84,13 +108,13 @@ void		count_cols(t_matrix *map)
 {
 	size_t	count;
 	
-	if (!map || !map->grid || !map->grid[0])
+	if (!map || !map->map || !map->map[0])
 	{
     	ft_printf("Errore: mappa non valida o non inizializzata\n");
     	return ;
 	}
-	ft_printf("Lunghezza prima riga: %d\n", ft_strlen(map->grid[0]));
-	count = (ft_strlen(map->grid[0]));
+	ft_printf("Lunghezza prima riga: %d\n", ft_strlen(map->map[0]));
+	count = (ft_strlen(map->map[0]));
 	map->cols = count;
 	return ;
 	

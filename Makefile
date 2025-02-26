@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/19 14:13:13 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/26 10:40:11 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC	=	so_long.c \
 		ft_validatemap_utils.c \
 		ft_for_flood_fill.c \
 		ft_to_validate_map.c \
+		mlx_init.c \
 
 # adds the src/ prefix to files in SRC
 SRC	:= $(addprefix src/, $(SRC))

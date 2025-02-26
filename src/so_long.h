@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 16:12:15 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:04:45 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,53 @@
 # include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
 # include "../Printf/ft_printf.h"         // Include le funzioni della libft
 
+# define TILE_SIZE 32
+
+// Definisci strutture utili per il gioco
+typedef struct s_textures
+{
+	void	*grass;
+	void	*wall;
+	int		size;
+}	t_textures;
+
 // Definisci strutture utili per il gioco
 typedef struct s_matrix
 {
-	char	**grid;
+	char	**map;
 	int		rows;
 	int		cols;
 	char	**map_cpy;
 	int     position_p_row;
     int     position_p_col;
+	t_textures	textures;
+	void	*mlx;
+	void	*win;
 }	t_matrix;
 
 // Prototipi delle funzioni principali
 void		free_map(char **map, int rows);
-void		free_matrix(t_matrix *map_struct);
+void		free_matrix(t_matrix *data);
 t_matrix	*allocate_map(int rows);
 t_matrix	*fill_map(t_matrix *map, char *filedescriptor);
 int			ft_count_rows(char *filename);
-void		free_matrix(t_matrix *map_struct);
+void		free_matrix(t_matrix *data);
 int			remove_new_line(char *str);
-int			check_map_rect(t_matrix *map_struct, int rows);
-int			check_map_walls(t_matrix *map_struct, int rows);
-int			check_map_walls_x(t_matrix *map_struct, int rows);
+int			check_map_rect(t_matrix *data, int rows);
+int			check_map_walls(t_matrix *data, int rows);
+int			check_map_walls_x(t_matrix *data, int rows);
 char		*copy_fd_tomap(t_matrix *map, char *line, int y, int fd);
 void		map_copy(t_matrix *map);
 void		flood_fill(t_matrix *map, int row, int col);
-void		check_values_map_cpy(t_matrix *map);
+int			check_values_map_cpy(t_matrix *map);
 void		find_position_p(t_matrix *map);
 int			count_p_e(t_matrix	*map);
 void		count_cols(t_matrix *map);
 int			check_if_valid_path(t_matrix *data);
+int			map_checks(t_matrix *data);
+void		open_window(t_matrix *data);
+void		fill_window(t_matrix *data);
+void		print_map(char *line, t_matrix *data, int index);
+void    	open_image(t_matrix *data);
 
 #endif

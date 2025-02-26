@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 16:13:18 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:59:46 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void flood_fill(t_matrix *map, int row, int col)
 
 //controlla dopo il riempimento con le X che non ci siano piu collezionabili e uscite
 //ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
-void	check_values_map_cpy(t_matrix *map)
+int	check_values_map_cpy(t_matrix *map)
 {
 	int		y;
 	int		x;
@@ -46,13 +46,13 @@ void	check_values_map_cpy(t_matrix *map)
 			if((map->map_cpy[y][x] == 'C') || (map->map_cpy[y][x] == 'E'))
 			{
 				ft_printf("Mappa non valida per percorso. \n");
-				return ;
+				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
-	ft_printf("Corretto mappa iterabile, collezionabili presi, uscita raggiunta");
+	return (ft_printf("Corretto mappa iterabile, collezionabili presi, uscita raggiunta\n"), 1);
 }
 
 //cerca la posizione iniziale da passare a flood fill
@@ -62,14 +62,14 @@ void		find_position_p(t_matrix *map)
 	int		x;
 	
 	y= 0;
-	count_p_e(map);
+
 	while(y < map->rows)
 	{
 		x = 0;
 		{
 			while (x < map->cols)
 			{
-				if(map->grid[y][x] == 'P')
+				if(map->map[y][x] == 'P')
 				{
 					map->position_p_row = y;
 					map->position_p_col = x;
@@ -97,11 +97,11 @@ int		count_p_e(t_matrix	*map)
 		x = 0;
 			while (x < map->cols)
 			{
-				if(map->grid[y][x] == 'P')
+				if(map->map[y][x] == 'P')
 				{
 					p++;
 				}
-				if(map->grid[y][x] == 'E')
+				if(map->map[y][x] == 'E')
 					e++;
 			x++;
 			}

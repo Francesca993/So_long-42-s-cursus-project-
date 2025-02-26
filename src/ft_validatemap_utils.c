@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	check_map_rect(t_matrix *map_struct, int rows)
+int	check_map_rect(t_matrix *data, int rows)
 {
 	int	y;
 	int	len;
@@ -20,10 +20,10 @@ int	check_map_rect(t_matrix *map_struct, int rows)
 	y = 0;
 	if (rows <= 0)
 		return (0);
-	len = (int)ft_strlen(map_struct->grid[0]);
+	len = (int)ft_strlen(data->map[0]);
 	while (y < rows)
 	{
-		if (((int)ft_strlen(map_struct->grid[y])) != len)
+		if (((int)ft_strlen(data->map[y])) != len)
 		{
 			ft_printf("Errore: le righe della mappa non sono tutte uguali!\n");
 			return (0);
@@ -36,59 +36,70 @@ int	check_map_rect(t_matrix *map_struct, int rows)
 		return (0);
 	}
 	ft_printf("Le righe della mappa sono tutte uguali ed è rettangolare.\n");
-	check_map_walls(map_struct, rows);
 	return (1);
 }
 
-int	check_map_walls_x(t_matrix *map_struct, int rows)
+int	check_map_walls_x(t_matrix *data, int rows)
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	x = 0;
-	while (map_struct->grid[y][x] != '\0')
+	while (data->map[y][x] != '\0')
 	{
-		if (map_struct->grid[y][x] != '1')
+		if (data->map[y][x] != '1')
 		{
 			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
+			ft_printf("ciao 3!\n");
 			return (0);
 		}
 		x++;
 	}
 	while (y < rows -1)
 	{
-		if (map_struct->grid[y][x - 1] != '1')
+		if (data->map[y][x - 1] != '1')
 		{
 			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
+			ft_printf("ciao 4!\n");
 			return (0);
 		}
 		y++;
 	}
 	return (1);
 }
-int	check_map_walls(t_matrix *map_struct, int rows)
+
+int	check_map_walls(t_matrix *data, int rows)
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	x = 0;
-	if (check_map_walls_x(map_struct, rows))
-	{
-		while (y < rows - 1)
+
+	ft_printf("ciao 1!\n");
+
+	if (!(check_map_walls_x(data, rows)))
+		return (0);
+	while (y < rows - 1)
 		{
-			if (map_struct->grid[y][x] != '1')
-				return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
+			if (data->map[y][x] != '1')
+			{
+				ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
+				ft_printf("ciao 5!\n");
+				return (0);
+			}
 			y++;
 		}
-		while (map_struct->grid[y][x] != '\0')
+		while (data->map[y][x] != '\0')
 		{
-			if (map_struct->grid[y][x] != '1')
+			if (data->map[y][x] != '1')
+			{
+				ft_printf("ciao 6!\n");
 				return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
+			}
 			x++;
 		}
-	}
-	ft_printf("Corretto: le righe della mappa sono tutte chiuse!\n");
+		ft_printf("Corretto: le righe della mappa sono tutte chiuse!\n");
 	return (1);
 }
