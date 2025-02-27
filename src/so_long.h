@@ -62,6 +62,7 @@ typedef struct s_matrix
 	void	*win;
 	int		count_moves;
 	int		colletionables;
+	int		keycode;
 }	t_matrix;
 
 // Prototipi delle funzioni principali

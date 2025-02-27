@@ -29,41 +29,46 @@ void    move_player(t_matrix *data, int new_row, int new_col)
         ft_printf("Posizione attuale: %d, %d\n", data->position_p_row, data->position_p_col);
         ft_printf("Nuova posizione tentata: %d, %d\n", new_row, new_col);
         // Cancella la posizione precedente
-        data->map[data->position_p_row][data->position_p_col] = '0';
-        
+        data->map[data->position_p_row][data->position_p_col] = '0';    
         // Aggiorna la posizione del giocatore
         data->position_p_row = new_row;
         data->position_p_col = new_col;
         data->map[data->position_p_row][data->position_p_col] = 'P';
         data->count_moves++;
-
+        //stampo su shell il conteggio delle mosse
+        ft_printf("Count moves: %d\n", data->count_moves);
         fill_window(data);
     }
 }
 
 int key_hook(int keycode, t_matrix *data)
 {
-     ft_printf("Tasto premuto: %d\n", keycode);
-    if (keycode == 119) // W - Su
-        move_player(data, data->position_p_row - 1, data->position_p_col);    
-    else if (keycode == 115) // S - Giù
+    data->keycode = keycode;
+    ft_printf("Tasto premuto: %d\n", keycode);
+    if (keycode == 119 || keycode == 65362) // W o Freccia Su
+        move_player(data, data->position_p_row - 1, data->position_p_col);
+    else if (keycode == 115 || keycode == 65364) // S o Freccia Giù
         move_player(data, data->position_p_row + 1, data->position_p_col);
-    else if (keycode == 97) // A - Sinistra
+    else if (keycode == 97 || keycode == 65361) // A o Freccia Sinistra
         move_player(data, data->position_p_row, data->position_p_col - 1);
-    else if (keycode == 100) // D - Destra
+    else if (keycode == 100 || keycode == 65363) // D o Freccia Destra
         move_player(data, data->position_p_row, data->position_p_col + 1);
     else if (keycode == 65307) // ESC - Esci
-        exit(0);
+        close_window(data);
     return (0);
 }
 
 void    exit_function(t_matrix *data)
 {
-    if ( data->map[data->position_p_row][data->position_p_col] == 'E' && data->colletionables == 0)
+    if (data->map[data->position_p_row][data->position_p_col] == 'E' && data->colletionables == 0)
 	{
 		ft_putstr_fd("\nYou fell into the BlackHole!\n", 1);
 		ft_putstr_fd("Enjoy the rest of your life in the void!\n", 1);
 		close_window(data);
 	}
-
+    else if(data->map[data->position_p_row][data->position_p_col] == 'E' && data->colletionables > 0)
+    {
+        ft_printf("Hai perso! Non hai raccolto tutti i collezionabili!");
+        close_window(data);
+    }
 }

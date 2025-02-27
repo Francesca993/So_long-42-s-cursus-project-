@@ -51,7 +51,6 @@ int	check_map_walls_x(t_matrix *data, int rows)
 		if (data->map[y][x] != '1')
 		{
 			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-			ft_printf("ciao 3!\n");
 			return (0);
 		}
 		x++;
@@ -61,7 +60,6 @@ int	check_map_walls_x(t_matrix *data, int rows)
 		if (data->map[y][x - 1] != '1')
 		{
 			ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-			ft_printf("ciao 4!\n");
 			return (0);
 		}
 		y++;
@@ -86,7 +84,6 @@ int	check_map_walls(t_matrix *data, int rows)
 			if (data->map[y][x] != '1')
 			{
 				ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n");
-				ft_printf("ciao 5!\n");
 				return (0);
 			}
 			y++;
@@ -95,7 +92,6 @@ int	check_map_walls(t_matrix *data, int rows)
 		{
 			if (data->map[y][x] != '1')
 			{
-				ft_printf("ciao 6!\n");
 				return (ft_printf("Errore: le righe della mappa non sono tutte chiuse!\n"), 0);
 			}
 			x++;

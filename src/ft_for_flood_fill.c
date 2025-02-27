@@ -55,13 +55,14 @@ int	check_values_map_cpy(t_matrix *map)
 	return (ft_printf("Corretto mappa iterabile, collezionabili presi, uscita raggiunta\n"), 1);
 }
 
-//cerca la posizione iniziale da passare a flood fill
+//cerca la posizione iniziale da passare a flood fill e conta i collezionabili
 void		find_position_p(t_matrix *map)
 {
 	int		y;
 	int		x;
 	
 	y= 0;
+	map->colletionables = 0;
 
 	while(y < map->rows)
 	{
@@ -75,7 +76,7 @@ void		find_position_p(t_matrix *map)
 					map->position_p_col = x;
 				}
 				if (map->map[y][x] == 'C')
-					map->coletionables++;
+					map->colletionables++;
 			x++;
 			}
 		}
@@ -100,9 +101,7 @@ int		count_p_e(t_matrix	*map)
 			while (x < map->cols)
 			{
 				if(map->map[y][x] == 'P')
-				{
 					p++;
-				}
 				if(map->map[y][x] == 'E')
 					e++;
 			x++;
