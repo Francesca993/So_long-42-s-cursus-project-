@@ -23,9 +23,9 @@ void    move_player(t_matrix *data, int new_row, int new_col)
             data->colletionables--;
         }
         if (data->map[new_row][new_col] == 'E')
-        {
             exit_function(data);
-        }
+        if (data->map[new_row][new_col] == 'N')
+            touch_enemy(data);
         ft_printf("Posizione attuale: %d, %d\n", data->position_p_row, data->position_p_col);
         ft_printf("Nuova posizione tentata: %d, %d\n", new_row, new_col);
         // Cancella la posizione precedente
