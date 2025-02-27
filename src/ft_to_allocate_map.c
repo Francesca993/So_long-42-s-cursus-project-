@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 16:43:54 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:51:05 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_matrix(t_matrix *data)
 		free_map(data->map_cpy, data->rows);
 		data->map_cpy = NULL;
 	}
+	free(data->mlx);
 	free(data); // Libera la struttura stessa
 }
 
