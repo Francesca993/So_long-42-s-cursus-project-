@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/27 14:51:40 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/27 15:02:34 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC	:= $(addprefix src/, $(SRC))
 OBJ	=	$(SRC:.c=.o)
 
 # compilation flags
-CFLAGS	=  -Wall -Werror -Wextra -g -I./include -Imlx
+CFLAGS	=  -Wall -Werror -Wextra -g -gdwarf-4 -O0 -I./include -Imlx
 
 # MLX flags
 MLX_DIR = minilibx

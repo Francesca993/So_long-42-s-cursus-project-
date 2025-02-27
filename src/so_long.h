@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 14:50:04 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:37:16 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void		display_moves(t_matrix *data);
 void		touch_enemy(t_matrix *data);
 void		exit_function(t_matrix *data, char new_pos);
 int			close_window(t_matrix *data);
+void		free_textures(t_matrix *data);
 
 #endif

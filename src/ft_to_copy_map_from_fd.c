@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/19 14:41:56 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:40:07 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void    map_copy(t_matrix *map)
 		map->map_cpy[i] = ft_strdup(map->map[i]);
 		if (!(map->map_cpy[i]))
 		{
-			while (i < 0)
+			while (i >= 0)
 			{
 				i--;
 				free(map->map_cpy[i]);
