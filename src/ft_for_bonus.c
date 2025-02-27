@@ -1,48 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_for_flood_fill.c                                :+:      :+:    :+:   */
+/*   ft_for_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/26 12:59:46 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:42:15 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#define FRAME_COUNT 4  // Numero di frame dell'animazione
-
-//funzioni per le animazioni dei personaggi
+//#define FRAME_COUNT 4  // Numero di frame dell'animazione
+/*
 typedef struct s_animation {
     void    *player_frames[FRAME_COUNT];  // Array di frame del personaggio
     int     current_frame;
     int     x;
     int     y;
 }   t_animation;
+*/
 
-void load_player_sprites(t_animation *animation, t_matrix *data)
+//funzioni per le animazioni dei personaggi
+
+void load_player_sprites(t_matrix *data)
 {
-
-    animation->player_frames[0] = mlx_xpm_file_to_image(data->mlx, "frame1.xpm", TILE_SIZE, TILE_SIZE);
-    animation->player_frames[1] = mlx_xpm_file_to_image(data->mlx, "frame2.xpm", TILE_SIZE, TILE_SIZE);
-    animation->player_frames[2] = mlx_xpm_file_to_image(data->mlx, "frame3.xpm", TILE_SIZE, TILE_SIZE);
-    animation->player_frames[3] = mlx_xpm_file_to_image(data->mlx, "frame4.xpm", TILE_SIZE, TILE_SIZE);
-    animation->current_frame = 0;
+    data->animation.player_frames[0] = mlx_xpm_file_to_image(data->mlx, "assets_bonus/three1.xpm", &data->textures.size, &data->textures.size);
+    data->animation.player_frames[1] = mlx_xpm_file_to_image(data->mlx, "assets_bonus/three2.xpm", &data->textures.size, &data->textures.size);
+    data->animation.player_frames[2] = mlx_xpm_file_to_image(data->mlx, "assets_bonus/three3.xpm", &data->textures.size, &data->textures.size);
+    data->animation.player_frames[3] = mlx_xpm_file_to_image(data->mlx, "assets_bonus/three4.xpm", &data->textures.size, &data->textures.size);
+    data->animation.current_frame = 0;
 }
-
-int update_animation(t_animation *animation, t_matrix *data)
+// Aggiorna l'animazione e ridisegna il frame corrente
+int update_animation(t_matrix *data)
 {
     static int frame_delay = 0;
 
     frame_delay++;
-    if (frame_delay >= 10) // Modifica il valore per regolare la velocità dell'animazione
+    if (frame_delay >= 50) // Regola la velocità dell'animazione
     {
-        animation->current_frame = (animation->current_frame + 1) % FRAME_COUNT;
+        data->animation.current_frame = (data->animation.current_frame + 1) % FRAME_COUNT;
         frame_delay = 0;
     }
-    //mlx_clear_window(data->mlx, data->win);?
-    mlx_put_image_to_window(data->mlx, data->win, animation->player_frames[animation->current_frame], animation->x, animation->y);
+    /*
+    mlx_put_image_to_window(data->mlx, data->win, 
+        data->animation.player_frames[data->animation.current_frame], 
+        data->animation.x, data->animation.y);
+    */
+    // mlx_put_image_to_window(data->mlx, data->win, data->animation.player_frames[data->animation.current_frame], i * TILE_SIZE, (index * TILE_SIZE));
+    fill_window(data);
+    display_moves(data);
     return (0);
 }
 
@@ -84,19 +91,32 @@ void display_moves(t_matrix *data)
     if (!display_text)
         return;
 /*
-  // Pulire la finestra per evitare sovrapposizioni
+    Pulire la finestra per evitare sovrapposizioni
     mlx_clear_window(data->mlx, data->win);
     // Ridisegnare il personaggio dopo la pulizia
     mlx_put_image_to_window(data->mlx, data->win, data->player_img, data->player_x, data->player_y);
 */
     // Mostrare il testo con il conteggio dei movimenti
-    mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, display_text);
+    //mlx_clear_window(data->mlx, data->win);
+    int i=0, j=0;
+    while (i < 30)
+    {
+        j = 0;
+        while (j < 100)
+        {
+            mlx_pixel_put(data->mlx, data->win, j, i, 0x000000);
+            j++;
+        }
+        i++;
+    }
+    
+    mlx_string_put(data->mlx, data->win, 10, 15, 0xCC0000, display_text);
 
     free(display_text); 
 }
 //funzioni per l'uscita se tocca un nemico
 
-void_touch_enemy(t_matrix *data)
+void touch_enemy(t_matrix *data)
 {
 		ft_putstr_fd("\nYou've touch an enemy!!\n", 1);
 		ft_putstr_fd("Retry, maybe you will be lucky!\n", 1);

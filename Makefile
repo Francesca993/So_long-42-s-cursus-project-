@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/26 15:36:26 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/27 14:51:40 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC	=	so_long.c \
 		ft_to_validate_map.c \
 		mlx_init.c \
 		ft_hook.c \
+		ft_for_bonus.c \
 
 # adds the src/ prefix to files in SRC
 SRC	:= $(addprefix src/, $(SRC))
@@ -30,7 +31,7 @@ SRC	:= $(addprefix src/, $(SRC))
 OBJ	=	$(SRC:.c=.o)
 
 # compilation flags
-CFLAGS	=	-Wall -Werror -Wextra -g -I./include -Imlx
+CFLAGS	=  -Wall -Werror -Wextra -g -I./include -Imlx
 
 # MLX flags
 MLX_DIR = minilibx

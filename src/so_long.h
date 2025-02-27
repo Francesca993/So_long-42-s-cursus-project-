@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/26 16:24:18 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:50:04 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 # include <unistd.h>   // Per read, write, close, etc.
 # include <fcntl.h>    // Per open()
 # include "../Libft/libft.h"         // Include le funzioni della libft
-//# include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
+# include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
 # include "../Printf/ft_printf.h"         // Include le funzioni della libft
 
 # define TILE_SIZE 64
+# define FRAME_COUNT 4
 
 // Definisci strutture utili per il gioco
 enum e_keys
@@ -48,6 +49,13 @@ typedef struct s_textures
 	int		size;
 }	t_textures;
 
+typedef struct s_animation {
+    void    *player_frames[FRAME_COUNT];  // Array di frame del personaggio
+    int     current_frame;
+    int     x;
+    int     y;
+}   t_animation;
+
 // Definisci strutture utili per il gioco
 typedef struct s_matrix
 {
@@ -63,6 +71,8 @@ typedef struct s_matrix
 	int		count_moves;
 	int		colletionables;
 	int		keycode;
+	t_animation	animation;
+
 }	t_matrix;
 
 // Prototipi delle funzioni principali
@@ -86,10 +96,16 @@ void		count_cols(t_matrix *map);
 int			check_if_valid_path(t_matrix *data);
 int			map_checks(t_matrix *data);
 void		open_window(t_matrix *data);
-void		fill_window(t_matrix *data);
+int			fill_window(t_matrix *data);
 void		print_map(char *line, t_matrix *data, int index);
 void    	open_image(t_matrix *data);
 int			key_hook(int keycode, t_matrix *data);
 void		move_player(t_matrix *game, int new_row, int new_col);
+void		load_player_sprites(t_matrix *data);
+int			update_animation(t_matrix *data);
+void		display_moves(t_matrix *data);
+void		touch_enemy(t_matrix *data);
+void		exit_function(t_matrix *data, char new_pos);
+int			close_window(t_matrix *data);
 
 #endif

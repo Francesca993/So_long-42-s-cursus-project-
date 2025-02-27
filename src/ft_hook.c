@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/26 16:32:59 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:01:55 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    move_player(t_matrix *data, int new_row, int new_col)
 {
     // Controlla se il nuovo movimento è valido (senza attraversare i muri)
-    if (data->map[new_row][new_col] != '1')
+    if ((data->map[new_row][new_col] != '1') && (data->map[new_row][new_col] != 'A'))
     {
         if (data->map[new_row][new_col] == 'C')
         {
@@ -23,7 +23,7 @@ void    move_player(t_matrix *data, int new_row, int new_col)
             data->colletionables--;
         }
         if (data->map[new_row][new_col] == 'E')
-            exit_function(data);
+            exit_function(data, data->map[new_row][new_col]);
         if (data->map[new_row][new_col] == 'N')
             touch_enemy(data);
         ft_printf("Posizione attuale: %d, %d\n", data->position_p_row, data->position_p_col);
@@ -59,17 +59,17 @@ int key_hook(int keycode, t_matrix *data)
     return (0);
 }
 
-void    exit_function(t_matrix *data)
+void    exit_function(t_matrix *data, char new_pos)
 {
-    if (data->map[data->position_p_row][data->position_p_col] == 'E' && data->colletionables == 0)
+    if (new_pos == 'E' && data->colletionables == 0)
 	{
 		ft_putstr_fd("\nYou fell into the BlackHole!\n", 1);
 		ft_putstr_fd("Enjoy the rest of your life in the void!\n", 1);
 		close_window(data);
 	}
-    else if(data->map[data->position_p_row][data->position_p_col] == 'E' && data->colletionables > 0)
+    else if(new_pos == 'E' && data->colletionables > 0)
     {
-        ft_printf("Hai perso! Non hai raccolto tutti i collezionabili!");
+        ft_printf("Hai perso! Non hai raccolto tutti i collezionabili!\n");
         close_window(data);
     }
 }
