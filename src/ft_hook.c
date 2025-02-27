@@ -35,6 +35,7 @@ void    move_player(t_matrix *data, int new_row, int new_col)
         data->position_p_col = new_col;
         data->map[data->position_p_row][data->position_p_col] = 'P';
         data->count_moves++;
+        //display_moves(data); //mostra a schermo il conteggio delle mosse
         //stampo su shell il conteggio delle mosse
         ft_printf("Count moves: %d\n", data->count_moves);
         fill_window(data);
