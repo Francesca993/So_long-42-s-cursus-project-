@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 16:40:07 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:04:03 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void    map_copy(t_matrix *map)
 
 	map->map_cpy = (char **)ft_calloc((map->rows + 1), sizeof(char *));
 	if (!(map->map_cpy))
-	{
-		ft_printf("Errore nell'allocazione della memoria nella copia della mappa");
 		return ;
-	}
 	i = 0;
 	while (i < map->rows)
 	{
@@ -113,9 +110,7 @@ void		count_cols(t_matrix *map)
     	ft_printf("Errore: mappa non valida o non inizializzata\n");
     	return ;
 	}
-	ft_printf("Lunghezza prima riga: %d\n", ft_strlen(map->map[0]));
 	count = (ft_strlen(map->map[0]));
 	map->cols = count;
 	return ;
-	
 }

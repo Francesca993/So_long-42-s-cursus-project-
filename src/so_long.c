@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 16:20:20 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:05:28 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_printf("Uso corretto: %s <nome_file>\n", argv[0]);
-		return (1);
+		return (ft_printf("Uso corretto: %s <nome_file>\n", argv[0]), 1);
 	}
 	rows = ft_count_rows(argv[1]);
 	data = allocate_map(rows);
@@ -31,17 +30,13 @@ int	main(int argc, char *argv[])
 		free_matrix(data);
 		return (1);
 	}
-	// Stampa la mappa per verifica
 	ft_printf("Mappa caricata:\n");
-	// for (int i = 0; i < data->rows; i++)
-	// 	printf("%s\n", data->map[i]);
 	if(!(map_checks(data)))
 	{
 		free_matrix(data);
 		return (1);
 	}
 	open_window(data);
-	// Libera la memoria
 	free_matrix(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/28 15:06:58 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:09:24 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,13 @@ void    	open_image(t_matrix *data);
 int			key_hook(int keycode, t_matrix *data);
 void		move_player(t_matrix *game, int new_row, int new_col);
 void		load_player_sprites(t_matrix *data);
+void		check_image(t_matrix *data);
 int			update_animation(t_matrix *data);
 void		display_moves(t_matrix *data);
 void		touch_enemy(t_matrix *data);
 void		exit_function(t_matrix *data, char new_pos);
 int			close_window(t_matrix *data);
+void		free_animation(t_matrix *data);
 void		free_textures(t_matrix *data);
 
 #endif

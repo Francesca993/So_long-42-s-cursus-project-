@@ -6,7 +6,7 @@
 #    By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 11:55:52 by fmontini          #+#    #+#              #
-#    Updated: 2025/02/28 14:20:17 by fmontini         ###   ########.fr        #
+#    Updated: 2025/02/28 17:11:07 by fmontini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC	=	so_long.c \
 		ft_validatemap_utils.c \
 		ft_for_flood_fill.c \
 		ft_to_validate_map.c \
+		ft_open_image.c \
 		mlx_init.c \
 		ft_to_exit.c \
 		ft_hook.c \

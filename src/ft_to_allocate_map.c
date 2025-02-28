@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 16:51:05 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:59:45 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_map(char **map, int rows)
 		}
 		i++;
 	}
-	free(map);/*libera l'array di puntatori*/
+	free(map);
 }
 
 void	free_matrix(t_matrix *data)
@@ -46,7 +46,7 @@ void	free_matrix(t_matrix *data)
 		data->map_cpy = NULL;
 	}
 	free(data->mlx);
-	free(data); // Libera la struttura stessa
+	free(data);
 }
 
 t_matrix	*allocate_map(int rows)
@@ -81,7 +81,7 @@ int	ft_count_rows(char *filename)
 	if (fd == -1)
 	{
 		ft_printf("Errore nell'apertura del file");
-		return (-1); // Segnala errore
+		return (-1);
 	}
 	while ((line = get_next_line(fd)) != NULL )
 	{

@@ -6,13 +6,13 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/28 14:50:01 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:57:21 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_textures(t_matrix *data)
+void free_animation(t_matrix *data)
 {
     int     i;
     int     j;
@@ -31,6 +31,11 @@ void free_textures(t_matrix *data)
             mlx_destroy_image(data->mlx, data->an_enemy.enemy_frames[j]);
         j++;
     }
+}
+
+void free_textures(t_matrix *data)
+{
+    free_animation(data);
     if (data->textures.wall)
         mlx_destroy_image(data->mlx, data->textures.wall);
     if (data->textures.grass)
@@ -70,13 +75,15 @@ void    exit_function(t_matrix *data, char new_pos)
 {
     if (new_pos == 'E' && data->colletionables == 0)
 	{
-		ft_putstr_fd("\nYou fell into the BlackHole!\n", 1);
-		ft_putstr_fd("Enjoy the rest of your life in the void!\n", 1);
+		ft_putstr_fd("\nWell done!\n", 1);
+		ft_putstr_fd("\nYou've reached the exit and collected all the collectibles!\n", 1);
+        ft_putstr_fd("\nYou won!\n", 1);
 		close_window(data);
 	}
     else if(new_pos == 'E' && data->colletionables > 0)
     {
-        ft_printf("Hai perso! Non hai raccolto tutti i collezionabili!\n");
+        ft_printf("\nYou Loose!\n");
+        ft_printf("\nyou haven't collected all the collectibles!!\n");
         close_window(data);
     }
 }
