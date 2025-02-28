@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/28 17:10:40 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:19:13 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void    check_image(t_matrix *data)
 {
-    if (!(data->textures.wall) || !(data->textures.grass) 
-            || !(data->textures.player_w)
-            || !(data->textures.player_s) || !(data->textures.player_d) 
-            || !(data->textures.player_a) || !(data->textures.exit))
+    if (!(data->textures.wall) || !(data->textures.grass)
+            || !(data->textures.player_w) || !(data->textures.player_s)
+            || !(data->textures.player_d) || !(data->textures.player_a)
+            || !(data->textures.exit) || !(data->textures.bowl))
     {
         ft_printf("texture non caricate");
         close_window(data);
@@ -45,8 +45,16 @@ void    open_image(t_matrix *data)
             "sprite_xpm/cuccia.xpm", &data->textures.size, &data->textures.size);
     data->textures.bowl = mlx_xpm_file_to_image(data->mlx, 
             "sprite_xpm/food.xpm", &data->textures.size, &data->textures.size);
-    check_image(data);
+        /*
 
+           if (!(data->textures.wall) || !(data->textures.grass) || !(data->textures.player_w) || !(data->textures.player_s) || !(data->textures.player_d) || !(data->textures.player_a) || !(data->textures.exit))
+    {
+        ft_printf("texture non caricate");
+        close_window(data);
+    }
+        */
+ 
+       check_image(data);
 }
 
 // W o Freccia Su

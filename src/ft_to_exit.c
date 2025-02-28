@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/28 16:57:21 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:31:05 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void free_animation(t_matrix *data)
         if (data->an_enemy.enemy_frames[j])
             mlx_destroy_image(data->mlx, data->an_enemy.enemy_frames[j]);
         j++;
+    }
+}
+
+void	check_animation(t_matrix *data)
+{
+	if (!(data->animation.player_frames[0]) || !(data->an_enemy.enemy_frames[0]))
+    {
+        ft_printf("texture non caricate");
+        close_window(data);
     }
 }
 
