@@ -6,42 +6,32 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 16:46:33 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:49:45 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_window(t_matrix *data)
-{
-    if (data->mlx && data->win)
-    {
-        free_textures(data);
-        printf("Closing window..\n");
-	    mlx_destroy_window(data->mlx, data->win);
-        mlx_destroy_display(data->mlx);
-    }
-    printf("Stopping mlx loop...\n");
-    mlx_loop_end(data->mlx);
-    free_matrix(data);
-	exit(EXIT_SUCCESS);
-}
+
 
 void    open_image(t_matrix *data)
 {
     load_player_sprites(data);
-    data->textures.grass = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/Grass.xpm", &data->textures.size, &data->textures.size);
-    data->textures.wall = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/wall.xpm copia", &data->textures.size, &data->textures.size);
-    data->textures.player_w = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_w.xpm", &data->textures.size, &data->textures.size);
-    data->textures.player_s = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_s.xpm", &data->textures.size, &data->textures.size);
-    data->textures.player_d = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_d.xpm", &data->textures.size, &data->textures.size);
-    data->textures.player_a = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/player_a.xpm", &data->textures.size, &data->textures.size);
-    data->textures.mouse = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/mouse.xpm", &data->textures.size, &data->textures.size);
-    data->textures.exit = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/cuccia.xpm", &data->textures.size, &data->textures.size);
-    data->textures.bowl = mlx_xpm_file_to_image(data->mlx, "/nfs/homes/fmontini/Desktop/So_long/sprite_xpm/food.xpm", &data->textures.size, &data->textures.size);
+    data->textures.grass = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/Grass.xpm", &data->textures.size, &data->textures.size);
+    data->textures.wall = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/wall.xpm copia", &data->textures.size, &data->textures.size);
+    data->textures.player_w = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/player_w.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_s = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/player_s.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_d = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/player_d.xpm", &data->textures.size, &data->textures.size);
+    data->textures.player_a = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/player_a.xpm", &data->textures.size, &data->textures.size);
+    data->textures.mouse = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/mouse.xpm", &data->textures.size, &data->textures.size);
+    data->textures.exit = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/cuccia.xpm", &data->textures.size, &data->textures.size);
+    data->textures.bowl = mlx_xpm_file_to_image(data->mlx, "sprite_xpm/food.xpm", &data->textures.size, &data->textures.size);
     
-    if (!((data->textures.wall) || (data->textures.grass)))
+    if (!((data->textures.wall) || (data->textures.grass) || (data->textures.player_w) || (data->textures.player_s) || (data->textures.player_d) || (data->textures.player_a) || (data->textures.exit))) 
+    {
         ft_printf("texture non caricate");
+        close_window(data);
+    }
 }
 
 void    print_player(t_matrix *data, int i, int index)
@@ -75,11 +65,10 @@ void    print_map(char *line, t_matrix *data, int index)
             mlx_put_image_to_window(data->mlx, data->win, data->textures.exit, i * TILE_SIZE, (index * TILE_SIZE));
         else if(line[i] == 'C')
             mlx_put_image_to_window(data->mlx, data->win, data->textures.bowl, i * TILE_SIZE, (index * TILE_SIZE));
-        //else if(line[i] == 'N')          
+        else if(line[i] == 'N')
+            mlx_put_image_to_window(data->mlx, data->win, data->an_enemy.enemy_frames[data->animation.current_frame], i * TILE_SIZE, (index * TILE_SIZE));
         else if(line[i] == 'A')
-            mlx_put_image_to_window(data->mlx, data->win, data->animation.player_frames[data->animation.current_frame], i * TILE_SIZE, (index * TILE_SIZE));
-
-            
+            mlx_put_image_to_window(data->mlx, data->win, data->animation.player_frames[data->animation.current_frame], i * TILE_SIZE, (index * TILE_SIZE));    
         i++;
         
     }
@@ -132,40 +121,4 @@ void open_window(t_matrix *data)
     mlx_hook(data->win, 17, 0, close_window, data); 
     mlx_loop(data->mlx);
 }
-void free_textures(t_matrix *data)
-{
-    int     i;
 
-    i = 0;
-    while ( i < FRAME_COUNT)
-    {
-        if (data->animation.player_frames[i])
-            mlx_destroy_image(data->mlx, data->animation.player_frames[i]);
-        i++;
-    }
-    /*
-        for (int i = 0; i < FRAME_COUNT; i++)
-    {
-        if (data->animation.player_frames[i])
-            mlx_destroy_image(data->mlx, data->animation.player_frames[i]);
-    }
-    */
-    if (data->textures.wall)
-        mlx_destroy_image(data->mlx, data->textures.wall);
-    if (data->textures.grass)
-        mlx_destroy_image(data->mlx, data->textures.grass);
-    if (data->textures.player_w)
-        mlx_destroy_image(data->mlx, data->textures.player_w);
-    if (data->textures.player_s)
-        mlx_destroy_image(data->mlx, data->textures.player_s);
-    if (data->textures.player_d)
-        mlx_destroy_image(data->mlx, data->textures.player_d);
-    if (data->textures.player_a)
-        mlx_destroy_image(data->mlx, data->textures.player_a);
-    if (data->textures.mouse)
-        mlx_destroy_image(data->mlx, data->textures.mouse);
-    if (data->textures.exit)
-        mlx_destroy_image(data->mlx, data->textures.exit);
-    if (data->textures.bowl)
-        mlx_destroy_image(data->mlx, data->textures.bowl);
-}

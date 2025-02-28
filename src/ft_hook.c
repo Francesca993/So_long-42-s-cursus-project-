@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 14:01:55 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:19:23 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,4 @@ int key_hook(int keycode, t_matrix *data)
     else if (keycode == 65307) // ESC - Esci
         close_window(data);
     return (0);
-}
-
-void    exit_function(t_matrix *data, char new_pos)
-{
-    if (new_pos == 'E' && data->colletionables == 0)
-	{
-		ft_putstr_fd("\nYou fell into the BlackHole!\n", 1);
-		ft_putstr_fd("Enjoy the rest of your life in the void!\n", 1);
-		close_window(data);
-	}
-    else if(new_pos == 'E' && data->colletionables > 0)
-    {
-        ft_printf("Hai perso! Non hai raccolto tutti i collezionabili!\n");
-        close_window(data);
-    }
 }

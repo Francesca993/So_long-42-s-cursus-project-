@@ -6,7 +6,7 @@
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/02/27 15:37:16 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:06:58 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ enum e_keys
 	D = 100,
 	ESC = 65307
 };
+
+typedef struct s_an_enemy {
+    void    *enemy_frames[FRAME_COUNT];  // Array di frame del personaggio
+    int     current_frame;
+    int     x;
+    int     y;
+}   t_enemy;
 
 typedef struct s_textures
 {
@@ -72,7 +79,8 @@ typedef struct s_matrix
 	int		colletionables;
 	int		keycode;
 	t_animation	animation;
-
+	t_enemy	an_enemy;
+	
 }	t_matrix;
 
 // Prototipi delle funzioni principali
@@ -93,6 +101,7 @@ int			check_values_map_cpy(t_matrix *map);
 void		find_position_p(t_matrix *map);
 int			count_p_e(t_matrix	*map);
 void		count_cols(t_matrix *map);
+int			count_c(t_matrix *map);
 int			check_if_valid_path(t_matrix *data);
 int			map_checks(t_matrix *data);
 void		open_window(t_matrix *data);
