@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_to_copy_map_from_fd.c                           :+:      :+:    :+:   */
+/*   bonus_ft_to_copy_map_from_fd.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:22:22 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:49:12 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 char	*copy_fd_tomap(t_matrix *map, char *line, int y, int fd)
 {
@@ -41,7 +41,7 @@ t_matrix	*fill_map(t_matrix *map, char *filedescriptor)
 	{
 		if (!copy_fd_tomap(map, line, y, fd))
 		{
-			close (fd);
+			close(fd);
 			return (NULL);
 		}
 		y++;
@@ -86,8 +86,7 @@ void	map_copy(t_matrix *map)
 			}
 			free(map->map_cpy);
 			map->map_cpy = NULL;
-			ft_printf("errore nell'allocazione della memoria ");
-			ft_printf("della copia della mappa");
+			ft_printf("Allocazione della mappa non riuscita");
 			return ;
 		}
 		i++;

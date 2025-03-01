@@ -1,0 +1,15 @@
+==176639== Memcheck, a memory error detector
+==176639== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==176639== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==176639== Command: ./so_long mapbonus.ber
+==176639== Parent PID: 68607
+==176639== 
+==176639== 
+==176639== HEAP SUMMARY:
+==176639==     in use at exit: 0 bytes in 0 blocks
+==176639==   total heap usage: 2,120 allocs, 2,120 frees, 2,514,746 bytes allocated
+==176639== 
+==176639== All heap blocks were freed -- no leaks are possible
+==176639== 
+==176639== For lists of detected and suppressed errors, rerun with: -s
+==176639== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

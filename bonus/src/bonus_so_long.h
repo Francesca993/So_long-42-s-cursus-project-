@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   bonus_so_long.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:44:27 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 17:08:15 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:31:46 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef BONUS_SO_LONG_H
+# define BONUS_SO_LONG_H
 
 //Include le librerie
 # include <stdio.h>    // Per printf, perror, etc.
 # include <stdlib.h>   // Per malloc, free, exit, etc.
 # include <unistd.h>   // Per read, write, close, etc.
 # include <fcntl.h>    // Per open()
-# include "../Libft/libft.h"         // Include le funzioni della libft
-# include "../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
-# include "../Printf/ft_printf.h"         // Include le funzioni della libft
+# include "../../Libft/libft.h"         // Include le funzioni della libft
+# include "../../minilibx/mlx.h"        // Include la libreria grafica MiniLibX
+# include "../../Printf/ft_printf.h"         // Include le funzioni della libft
 
 # define TILE_SIZE 64
+# define FRAME_COUNT 4
 
 // Definisci strutture utili per il gioco
-enum e_keys
+
+typedef struct s_an_enemy
 {
-	W = 119,
-	A = 97,
-	S = 115,
-	D = 100,
-	ESC = 65307
-};
+	void	*enemy_frames[FRAME_COUNT];
+	int		current_frame;
+	int		x;
+	int		y;
+	int		dir;
+}	t_enemy;
 
 typedef struct s_textures
 {
@@ -42,10 +44,19 @@ typedef struct s_textures
 	void	*player_a;//giu
 	void	*player_s;//sinistra
 	void	*player_d;//destra
+	void	*mouse;
 	void	*bowl;
 	void	*exit;
 	int		size;
 }	t_textures;
+
+typedef struct s_animation
+{
+	void	*player_frames[FRAME_COUNT];
+	int		current_frame;
+	int		x;
+	int		y;
+}	t_animation;
 
 // Definisci strutture utili per il gioco
 typedef struct s_matrix
@@ -62,7 +73,11 @@ typedef struct s_matrix
 	int			count_moves;
 	int			colletionables;
 	int			keycode;
+	char		*move_count;
+	t_animation	animation;
+	t_enemy		an_enemy;
 	int			coll_fill_found;
+
 }	t_matrix;
 
 // Prototipi delle funzioni principali
@@ -74,7 +89,6 @@ int			ft_count_rows(char *filename);
 void		free_matrix(t_matrix *data);
 int			remove_new_line(char *str);
 int			check_map_rect(t_matrix *data, int rows);
-int			count_c_remaining(t_matrix *map);
 int			check_map_walls(t_matrix *data, int rows);
 int			check_map_walls_x(t_matrix *data, int rows);
 char		*copy_fd_tomap(t_matrix *map, char *line, int y, int fd);
@@ -92,10 +106,21 @@ int			fill_window(t_matrix *data);
 void		print_map(char *line, t_matrix *data, int index);
 void		open_image(t_matrix *data);
 int			key_hook(int keycode, t_matrix *data);
+void		load_enemy(t_matrix *data);
 void		move_player(t_matrix *game, int new_row, int new_col);
+void		load_player_sprites(t_matrix *data);
 void		check_image(t_matrix *data);
+int			update_animation(t_matrix *data);
+void		display_moves(t_matrix *data);
+void		touch_enemy(t_matrix *data);
 void		exit_function(t_matrix *data, char new_pos);
 int			close_window(t_matrix *data);
+void		free_animation(t_matrix *data);
+void		check_animation(t_matrix *data);
 void		free_textures(t_matrix *data);
+int			update_animation_enemy(t_matrix *data);
+void		move_enemy(t_matrix *data);
+void		count_enemy(t_matrix *map);
+void		enemy_come_back(t_matrix *data);
 
 #endif

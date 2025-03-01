@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   bonus_so_long.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 17:25:00 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:00:09 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 int	main(int argc, char *argv[])
 {
@@ -31,10 +31,10 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	ft_printf("Mappa caricata:\n");
-	if ((map_checks(data) == 0))
+	if (!(map_checks(data)))
 	{
 		free_matrix(data);
-		return (0);
+		return (1);
 	}
 	open_window(data);
 	free_matrix(data);

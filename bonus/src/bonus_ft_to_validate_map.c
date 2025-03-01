@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_to_validate_map.c                               :+:      :+:    :+:   */
+/*   bonus_ft_to_validate_map.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 17:30:20 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:37:05 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 // copio la mappa
-//cerca la posizione iniziale da passare a flood fill e controlla 
+//cerca la posizione iniziale da passare a flood fill e controlla
+//conta i nemici
 //che non ci siano piu di un'unscita o di una posizione di partenza
 //riempe la mappa ovunque possa passare
-//controlla dopo il riempimento con le X che non ci 
-//siano piu collezionabili e uscite
+//controlla dopo il riempimento con le X che non ci siano piu 
+//collezionabili e uscite
 //ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
 int	check_if_valid_path(t_matrix *data)
 {
 	count_cols(data);
-	map_copy(data);
+	data->an_enemy.dir = 1;
+	count_enemy(data);
 	data->coll_fill_found = 0;
+	map_copy(data);
 	if (!data->map_cpy)
 	{
 		ft_printf("Errore: allocazione della copia della mappa fallita.\n");
@@ -40,6 +43,7 @@ int	check_if_valid_path(t_matrix *data)
 	return (1);
 }
 
+//controllare la mappa rettangolare
 int	map_checks(t_matrix *data)
 {
 	if (!(check_map_rect(data, data->rows)))
@@ -52,7 +56,7 @@ int	map_checks(t_matrix *data)
 		return (1);
 	else
 	{
-		ft_printf("Errore: Non tutti i collezionabili sono stati trovati!\n");
+		ft_printf("Non si possono raccogliere tutti i collezionabili\n");
 		return (0);
 	}
 	return (1);

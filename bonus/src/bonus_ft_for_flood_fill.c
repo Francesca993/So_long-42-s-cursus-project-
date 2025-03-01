@@ -1,43 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_for_flood_fill.c                                :+:      :+:    :+:   */
+/*   bonus_ft_for_flood_fill.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 17:29:58 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:32:26 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-int	count_c_remaining(t_matrix *map)
-{
-	int		y;
-	int		c;
-	int		x;
-
-	c = 0;
-	y = 0;
-	while (y < map->rows)
-	{
-		x = 0;
-		while (x < map->cols)
-		{
-			if (map->map_cpy[y][x] == 'C')
-				c++;
-			x++;
-		}
-		y++;
-	}
-	return (c);
-}
+#include "bonus_so_long.h"
 
 //riempe la mappa ovunque possa passare
-//controlla dopo il riempimento con le X che 
-//non ci siano piu collezionabili e uscite
-//ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
 void	flood_fill(t_matrix *map, int row, int col)
 {
 	if ((map->map_cpy[row][col] != '\0'))
@@ -64,6 +39,9 @@ void	flood_fill(t_matrix *map, int row, int col)
 		return ;
 }
 
+//controlla dopo il riempimento con le X 
+//che non ci siano piu collezionabili e uscite
+//ovvero che sono stati raccolti tutti o è stata raggiunta l'uscita
 int	check_values_map_cpy(t_matrix *map)
 {
 	int		y;
@@ -84,8 +62,7 @@ int	check_values_map_cpy(t_matrix *map)
 		}
 		y++;
 	}
-	ft_printf("Corretto mappa iterabile\n");
-	ft_printf("ollezionabili presi, uscita raggiunta\n");
+	ft_printf("Mappa iterabile, collezionabili presi, uscita raggiunta\n");
 	return (1);
 }
 

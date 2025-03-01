@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_validatemap_utils.c                             :+:      :+:    :+:   */
+/*   bonus_ft_validatemap_utils.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:36:26 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:00:16 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 int	check_map_rect(t_matrix *data, int rows)
 {
@@ -80,7 +80,7 @@ int	check_map_walls(t_matrix *data, int rows)
 	{
 		if (data->map[y][x] != '1')
 		{
-			return (ft_printf("Righe della mappa non sono tutte chiuse!\n"), 0);
+			return (ft_printf("La mappa non e chiusa!\n"), 0);
 		}
 		y++;
 	}
@@ -88,7 +88,7 @@ int	check_map_walls(t_matrix *data, int rows)
 	{
 		if (data->map[y][x] != '1')
 		{
-			return (ft_printf("Righe della mappa non sono tutte chiuse!\n"), 0);
+			return (ft_printf("La mappa non e chiusa!!\n"), 0);
 		}
 		x++;
 	}

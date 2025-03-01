@@ -1,19 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_to_exit.c                                       :+:      :+:    :+:   */
+/*   bonus_ft_to_exit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:27:49 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:52:20 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
+
+void	free_animation(t_matrix *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < FRAME_COUNT)
+	{
+		if (data->animation.player_frames[i])
+			mlx_destroy_image(data->mlx, data->animation.player_frames[i]);
+		i++;
+	}
+	while (j < FRAME_COUNT)
+	{
+		if (data->an_enemy.enemy_frames[j])
+			mlx_destroy_image(data->mlx, data->an_enemy.enemy_frames[j]);
+		j++;
+	}
+}
+
+void	check_animation(t_matrix *data)
+{
+	if (!(data->animation.player_frames[0])
+		|| !(data->an_enemy.enemy_frames[0]))
+	{
+		ft_printf("texture non caricate");
+		close_window(data);
+	}
+}
 
 void	free_textures(t_matrix *data)
 {
+	free_animation(data);
 	if (data->textures.wall)
 		mlx_destroy_image(data->mlx, data->textures.wall);
 	if (data->textures.grass)
@@ -26,6 +58,8 @@ void	free_textures(t_matrix *data)
 		mlx_destroy_image(data->mlx, data->textures.player_d);
 	if (data->textures.player_a)
 		mlx_destroy_image(data->mlx, data->textures.player_a);
+	if (data->textures.mouse)
+		mlx_destroy_image(data->mlx, data->textures.mouse);
 	if (data->textures.exit)
 		mlx_destroy_image(data->mlx, data->textures.exit);
 	if (data->textures.bowl)
@@ -52,8 +86,8 @@ void	exit_function(t_matrix *data, char new_pos)
 	if (new_pos == 'E' && data->colletionables == 0)
 	{
 		ft_putstr_fd("\nWell done!\n", 1);
-		ft_putstr_fd("\nYou've reached the exit ", 1);
-		ft_putstr_fd("\nand collected all the collectibles!\n", 1);
+		ft_putstr_fd("\nYou've reached the exit and", 1);
+		ft_putstr_fd(" collected all the collectibles!\n", 1);
 		ft_putstr_fd("\nYou won!\n", 1);
 		close_window(data);
 	}

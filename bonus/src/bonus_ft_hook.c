@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hook.c                                          :+:      :+:    :+:   */
+/*   bonus_ft_hook.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:05:31 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:30:59 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 // Controlla se il nuovo movimento è valido (senza attraversare i muri)
 void	move_player(t_matrix *data, int new_row, int new_col)
 {
 	if ((data->map[new_row][new_col] != '1') &&
-		(data->map[new_row][new_col] != 'A'))
+	(data->map[new_row][new_col] != 'A'))
 	{
 		if (data->map[new_row][new_col] == 'C')
 		{
@@ -25,6 +25,8 @@ void	move_player(t_matrix *data, int new_row, int new_col)
 		}
 		if (data->map[new_row][new_col] == 'E')
 			exit_function(data, data->map[new_row][new_col]);
+		if (data->map[new_row][new_col] == 'N')
+			touch_enemy(data);
 		ft_printf("Posizione attuale: ");
 		ft_printf("%d, %d\n", data->position_p_row, data->position_p_col);
 		data->map[data->position_p_row][data->position_p_col] = '0';
@@ -47,13 +49,25 @@ int	key_hook(int keycode, t_matrix *data)
 	data->keycode = keycode;
 	ft_printf("Tasto premuto: %d\n", keycode);
 	if (keycode == 119 || keycode == 65362)
+	{
 		move_player(data, data->position_p_row - 1, data->position_p_col);
+		move_enemy(data);
+	}
 	else if (keycode == 115 || keycode == 65364)
+	{
 		move_player(data, data->position_p_row + 1, data->position_p_col);
+		move_enemy(data);
+	}
 	else if (keycode == 97 || keycode == 65361)
+	{
 		move_player(data, data->position_p_row, data->position_p_col - 1);
+		move_enemy(data);
+	}
 	else if (keycode == 100 || keycode == 65363)
+	{
 		move_player(data, data->position_p_row, data->position_p_col + 1);
+		move_enemy(data);
+	}
 	else if (keycode == 65307)
 		close_window(data);
 	return (0);

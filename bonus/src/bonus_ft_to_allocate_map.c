@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_to_allocate_map.c                               :+:      :+:    :+:   */
+/*   bonus_ft_to_allocate_map.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:18:15 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:44:03 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 void	free_map(char **map, int rows)
 {
@@ -84,7 +84,7 @@ int	ft_count_rows(char *filename)
 		return (-1);
 	}
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL )
 	{
 		count++;
 		free(line);

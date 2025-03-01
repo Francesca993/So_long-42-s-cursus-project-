@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open_image.c                                    :+:      :+:    :+:   */
+/*   bonus_ft_open_image.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:49:36 by fmontini          #+#    #+#             */
-/*   Updated: 2025/03/01 12:16:20 by fmontini         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:42:46 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "bonus_so_long.h"
 
 void	check_image(t_matrix *data)
 {
@@ -26,11 +26,12 @@ void	check_image(t_matrix *data)
 
 void	open_image(t_matrix *data)
 {
+	load_player_sprites(data);
 	data->textures.grass = mlx_xpm_file_to_image(data->mlx,
 			"sprite_xpm/Grass.xpm", &data->textures.size, &data->textures.size);
 	data->textures.wall = mlx_xpm_file_to_image(data->mlx,
-			"sprite_xpm/wall.xpm copia",
-			&data->textures.size, &data->textures.size);
+			"sprite_xpm/wall.xpm copia", &data->textures.size,
+			&data->textures.size);
 	data->textures.player_w = mlx_xpm_file_to_image(data->mlx,
 			"sprite_xpm/player_w.xpm",
 			&data->textures.size, &data->textures.size);
@@ -44,10 +45,11 @@ void	open_image(t_matrix *data)
 			"sprite_xpm/player_a.xpm",
 			&data->textures.size, &data->textures.size);
 	data->textures.exit = mlx_xpm_file_to_image(data->mlx,
-			"sprite_xpm/cuccia.xpm", &data->textures.size,
-			&data->textures.size);
+			"sprite_xpm/cuccia.xpm",
+			&data->textures.size, &data->textures.size);
 	data->textures.bowl = mlx_xpm_file_to_image(data->mlx,
-			"sprite_xpm/food.xpm", &data->textures.size, &data->textures.size);
+			"sprite_xpm/food.xpm",
+			&data->textures.size, &data->textures.size);
 	check_image(data);
 }
 
@@ -74,6 +76,18 @@ void	print_player(t_matrix *data, int i, int index)
 			data->textures.player_d, i * TILE_SIZE, (index * TILE_SIZE));
 }
 
+void	print_map_enemy(char *line, t_matrix *data, int index, int i)
+{
+	if (line[i] == 'N')
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->an_enemy.enemy_frames[data->animation.current_frame],
+			i * TILE_SIZE, (index * TILE_SIZE));
+	else if (line[i] == 'A')
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->animation.player_frames[data->animation.current_frame],
+			i * TILE_SIZE, (index * TILE_SIZE));
+}
+
 void	print_map(char *line, t_matrix *data, int index)
 {
 	int	i;
@@ -95,6 +109,8 @@ void	print_map(char *line, t_matrix *data, int index)
 		else if (line[i] == 'C')
 			mlx_put_image_to_window(data->mlx, data->win,
 				data->textures.bowl, i * TILE_SIZE, (index * TILE_SIZE));
+		else if ((line[i] == 'N') || (line[i] == 'A'))
+			print_map_enemy(line, data, index, i);
 		i++;
 	}
 }
